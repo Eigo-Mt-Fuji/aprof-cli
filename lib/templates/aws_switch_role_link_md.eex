@@ -1,0 +1,4 @@
+[AWS( Master <%= organization_account_id %> )](https://<%= organization_account_id %>.signin.aws.amazon.com/console)
+<%= for context <- context do %>
+[AWS( <%= Map.fetch!(context, :display_name) %> <%= Map.fetch!(context, :account_id) %> )](<%= Map.fetch!(context, :switch_role_url) %>)
+<% end %>
