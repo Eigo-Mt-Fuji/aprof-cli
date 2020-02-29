@@ -1,4 +1,4 @@
-defmodule ExAwsConf.Builder do
+defmodule ExAwsConf.Utils.Builder do
   require EEx
 
   alias ExAwsConf.Utils
