@@ -1,4 +1,4 @@
-defmodule Utils.Logger do
+defmodule ExAwsConf.Utils.Logger do
     def debug(message \\ "") do
         case System.get_env("IS_DEBUG") do
             nil -> nil

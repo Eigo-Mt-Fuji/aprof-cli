@@ -1,16 +1,18 @@
-defmodule AprofCli.MixProject do
+defmodule ExAwsConf.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :aprof_cli,
+      app: :ex_awsconf,
       version: "0.1.0",
       elixir: "~> 1.9",
+      description: description(),
+      package: package(),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       escript: escript(),
       releases: [
-        aprof: [
+        ex_awsconf: [
           include_executables_for: [:unix],
           applications: [runtime_tools: :permanent]
         ]
@@ -29,12 +31,25 @@ defmodule AprofCli.MixProject do
   defp deps do
     [
       {:csv, "~> 2.2.0"},
-      {:jason, "~> 1.1.2"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:jason, "~> 1.1.2"},
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
   defp escript do
-    [main_module: AprofCli]
+    [main_module: ExAwsConf]
+  end
+  defp description() do
+    "A simple Elixir cli tool for generating aws-cli config."
+  end
+
+  defp package() do
+    [
+      # This option is only needed when you don't want to use the OTP application name
+      name: "ex-awsconf",
+      # These are the default files included in the package
+      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/Eigo-Mt-Fuji/ex-awsconf"}
+    ]
   end
 end

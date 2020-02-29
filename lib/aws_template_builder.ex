@@ -1,5 +1,7 @@
-defmodule AwsTemplateBuilder do
+defmodule ExAwsConf.AwsTemplateBuilder do
   require EEx
+
+  alias ExAwsConf.Utils
 
   def run(organization_account_id, src_dir, dest_dir, output_format, mfa_serial, role_session_name) do
     artifacts = 
@@ -55,13 +57,13 @@ defmodule AwsTemplateBuilder do
   end
 
   EEx.function_from_file(
-    :defp, 
+    :def, 
     :build_aws_config, 
     "lib/templates/aws_config.eex", 
     [:contexts, :output_format, :mfa_serial, :role_session_name]
   )
   EEx.function_from_file(
-    :defp, 
+    :def, 
     :build_aws_switch_role_link_md, 
     "lib/templates/aws_switch_role_link_md.eex",
     [:contexts, :organization_account_id]
