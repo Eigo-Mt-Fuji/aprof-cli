@@ -51,8 +51,7 @@ mkdir -p ./artifacts
   - with Docker.
 
 ```bash
-docker build -t aprof_cli .
-docker run -v $(pwd)/files:/usr/local/src/files:ro -v $(pwd)/artifacts:/usr/local/src/artifacts:rw aprof_cli:latest<parent_aws_account_id> /usr/local/src/files /usr/local/src/artifacts <aws-cli config\'s format(e.g. json)> arn:aws:iam::<parenparent_aws_account_idt_account_id>:mfa/<user_name>
+docker run -v $(pwd)/files:/usr/local/src/files:ro -v $(pwd)/artifacts:/usr/local/src/artifacts:rw efgriver/aprof-cli:latest <parent_aws_account_id> /usr/local/src/files /usr/local/src/artifacts <[json]()> arn:aws:iam::<parent_aws_account_id>:mfa/<user_name> <role-session-name>
 ```
 
 * Execute Output is JSON format like following.
