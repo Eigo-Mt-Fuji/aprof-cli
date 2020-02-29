@@ -1,8 +1,13 @@
 defmodule AwsTemplateBuilder do
+  require EEx
 
-  def run(src_dir, dest_dir, output_format, mfa_serial, role_session_name) do
-    #
-    fetch_src_files(src_dir) |> Enum.each( &( &1 |> build_one(dest_dir, output_format, mfa_serial, role_session_name) ) )
+  def run(organization_account_id, src_dir, dest_dir, output_format, mfa_serial, role_session_name) do
+    artifacts = 
+      src_dir |> 
+      fetch_src_files |> 
+      Enum.map( &( build_one(&1, organization_account_id, dest_dir, output_format, mfa_serial, role_session_name) ) )
+
+    %{status: :ok, artifacts: artifacts}
   end
 
   defp fetch_src_files(src_dir) do
@@ -12,44 +17,55 @@ defmodule AwsTemplateBuilder do
     end
   end
 
-  defp build_one(src_csv_file_path, dest_dir, output_format, mfa_serial, role_session_name) do
-    config_dest_path = aws_config_file_path(src_csv_file_path, ".csv", dest_dir)
-    switch_role_link_md_path = aws_switch_role_link_md_path(src_csv_file_path, ".csv", dest_dir)
+  defp build_one(src_csv_file_path, organization_account_id, dest_dir, output_format, mfa_serial, role_session_name) do
 
     contexts = src_csv_file_path |> 
-      File.stream! |> 
-      CSV.decode!(separator: ?,, headers: [ :account_id, :email_address, :role_name, :profile_name, :display_name ]) |> 
-      Enum.map( 
-        &(
-          Map.merge(
-            &1, 
-            %{
-              role_arn: to_iam_role_arn(Map.fetch!(&1,:account_id), Map.fetch!(&1, :role_name)),
-              switch_role_url: to_switch_role_url(Map.fetch!(&1, :display_name), Map.fetch!(&1, :role_name), Map.fetch!(&1, :account_id), "FAD791")
-             }
-          )
+    File.stream! |> 
+    CSV.decode!(separator: ?,, headers: [ :account_id, :email_address, :role_name, :profile_name, :display_name ]) |> 
+    Enum.map( 
+      &(
+        Map.merge(
+          &1, 
+          %{
+            role_arn: to_iam_role_arn(Map.fetch!(&1,:account_id), Map.fetch!(&1, :role_name)),
+            switch_role_url: to_switch_role_url(Map.fetch!(&1, :display_name), Map.fetch!(&1, :role_name), Map.fetch!(&1, :account_id), "FAD791")
+           }
         )
       )
+    )
+
+    config_dest_path = aws_config_file_path(src_csv_file_path, ".csv", dest_dir)
   
-    bindings = [ 
-      contexts: contexts, 
-      output_format: output_format, 
-      mfa_serial: mfa_serial, 
-      role_session_name: role_session_name, 
-      current_timestamp: :os.system_time(:millisecond) 
-    ]
     # build aws/config
-    IO.puts("Building #{src_csv_file_path} aws-cli config ...")
-    aws_config_content = EEx.eval_file( "./lib/template/aws_config.eex", bindings, [] )
+    Utils.Logger.debug("Mkdir for #{config_dest_path}...")
+    config_dest_path |> Path.dirname |> File.mkdir_p!
+    Utils.Logger.debug("Building #{src_csv_file_path} aws-cli config ...")
+    aws_config_content = build_aws_config(contexts, output_format, mfa_serial, role_session_name)
     File.write(config_dest_path, aws_config_content)
 
     # build switch-role-link.md
-    IO.puts("Building #{src_csv_file_path} switch-role-link.md ...")
-    switch_role_link_md_content = EEx.eval_file( "./lib/template/aws_switch_role_link_md.eex", bindings, [] )
-    File.write(switch_role_link_md_path, switch_role_link_md_content)
+    switch_role_link_md_dest_path = aws_switch_role_link_md_path(src_csv_file_path, ".csv", dest_dir)
+    Utils.Logger.debug("Mkdir for #{switch_role_link_md_dest_path}...")
+    switch_role_link_md_dest_path |> Path.dirname |> File.mkdir_p!
+    Utils.Logger.debug("Building #{src_csv_file_path} switch-role-link.md ...")
+    switch_role_link_md_content = build_aws_switch_role_link_md(contexts, organization_account_id)
+    File.write(switch_role_link_md_dest_path, switch_role_link_md_content)
 
-    :ok
+    %{src: src_csv_file_path, aws_config: config_dest_path, switch_role_link_md: switch_role_link_md_dest_path}
   end
+
+  EEx.function_from_file(
+    :defp, 
+    :build_aws_config, 
+    "lib/templates/aws_config.eex", 
+    [:contexts, :output_format, :mfa_serial, :role_session_name]
+  )
+  EEx.function_from_file(
+    :defp, 
+    :build_aws_switch_role_link_md, 
+    "lib/templates/aws_switch_role_link_md.eex",
+    [:contexts, :organization_account_id]
+  )
 
   defp aws_config_file_path(src_path, src_ext, dest_dir) do
     case File.dir?(dest_dir) do

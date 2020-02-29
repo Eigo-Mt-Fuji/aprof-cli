@@ -9,7 +9,6 @@ defmodule AprofCli.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       escript: escript(),
-      build_embedded: true,
       releases: [
         aprof: [
           include_executables_for: [:unix],
@@ -30,13 +29,12 @@ defmodule AprofCli.MixProject do
   defp deps do
     [
       {:csv, "~> 2.2.0"},
-      {:poison, "~> 3.1"},
-
+      {:jason, "~> 1.1.2"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
   defp escript do
-    [main_module: AprofCli, embed_elixir: true]
+    [main_module: AprofCli]
   end
 end

@@ -24,3 +24,6 @@ aprof_cli-*.tar
 
 /files/*
 /rel/*
+/artifacts/
+
+/*-build.sh

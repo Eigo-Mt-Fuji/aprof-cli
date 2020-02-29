@@ -1,13 +1,13 @@
 [default]
 region = ap-northeast-1
 output = json
-
 <%= for context <- contexts do %>
 [profile <%= Map.fetch!(context, :profile_name) %>]
 source_profile = default
-region = <%= Map.fetch!(context, :region_code) %>
+region = ap-northeast-1
 output = <%= output_format %>
 role_arn = <%= Map.fetch!(context, :role_arn) %>
 mfa_serial = <%= mfa_serial %>
 role_session_name = <%= role_session_name %>
 <% end %>
+    

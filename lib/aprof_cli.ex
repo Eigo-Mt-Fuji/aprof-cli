@@ -1,16 +1,9 @@
 defmodule AprofCli do
   def main(args \\ []) do
-    IO.inspect(args)
 
-    src_dir = Enum.at(args, 0)
-    IO.puts(src_dir)
-    dest_dir = Enum.at(args, 1)
-    role_session_name = Enum.at(args, 2)
-    mfa_serial = Enum.at(args, 3)
-    output_format = Enum.at(args, 4)
+    [organization_account_id, src_dir, dest_dir, role_session_name, mfa_serial, output_format]  = args
 
-    # build
-    AwsTemplateBuilder.run(src_dir, dest_dir, output_format, mfa_serial, role_session_name)
-    IO.puts("done.")
+    AwsTemplateBuilder.run(organization_account_id, src_dir, dest_dir, output_format, mfa_serial, role_session_name) |> 
+    Jason.encode!(pretty: true) |> IO.puts
   end
 end
