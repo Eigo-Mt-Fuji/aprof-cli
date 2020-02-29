@@ -55,7 +55,7 @@ mkdir -p ./artifacts
 docker run \
   -v $(pwd)/files:/usr/local/src/files:ro \
   -v $(pwd)/artifacts:/usr/local/src/artifacts:rw \
-  efgriver/aprof-cli:latest \
+  efgriver/ex-awsconf:latest \
   <parent_aws_account_id> /usr/local/src/files /usr/local/src/artifacts <aws-cli default output format(e.g. json)>\
   arn:aws:iam::<parent_aws_account_id>:mfa/<user_name> \
   <role-session-name>
