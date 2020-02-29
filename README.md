@@ -2,8 +2,8 @@
 
 Hello guys.
 
-This is simple Elixir cli tool for generating AWS(Amazon Web Service)'s cli config(aws-cli config) 
-(and AWS switch role login Markdown file also)
+This is simple Elixir cli tool for generating aws-cli config.
+(and also generating AWS switch role login links markdown file.)
 
 ## Require 
 
