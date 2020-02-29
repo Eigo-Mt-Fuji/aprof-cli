@@ -11,7 +11,6 @@ defmodule ExAwsConf do
   ## Parameters
 
     Following arguments are expected to specify as args.
-  , , , , , 
     - organization_account_id: String that represents the top of aws account id of your organization
     - src_dir: String that represents the directory which having your aws accounts listing csv files. this tool will make aws-config based on list in csv file
     - dest_dir: String that represents the destination directory (aws-cli config switch-role login markdown will be exported into this directory.)
