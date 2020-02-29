@@ -1,9 +1,10 @@
-# AprofCli
+# README
 
 Hello guys.
 
-This is simple Elixir cli tool for generating aws-cli config.<br/>
+[ex_awsconf][https://hexdocs.pm/ex_awsconf/0.1.0] is a simple Elixir cli tool for generating aws-cli config.<br/>
 (and also generating AWS switch role login links markdown file.)
+
 
 ## Require 
 
