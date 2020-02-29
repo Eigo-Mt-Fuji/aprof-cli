@@ -16,8 +16,8 @@ Hello guys.
 * Clone Repository and Get Dependencies 
 
 ```bash
-$ git clone git@github.com:Eigo-Mt-Fuji/aprof-cli.git
-$ cd aprof-cli/
+$ git clone git@github.com:Eigo-Mt-Fuji/ex-awsconf.git
+$ cd ex-awsconf/
 $ mix deps.get
 ```
 
