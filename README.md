@@ -1,6 +1,6 @@
 # README
 
-[![hex.pm version](https://img.shields.io/hexpm/v/ex_awsconf.svg)](https://hexdocs.pm/packages/ex_awsconf)
+[![hex.pm version](https://img.shields.io/hexpm/v/ex_awsconf.svg)](https://hex.pm/packages/ex_awsconf)
 [![hex.pm](https://img.shields.io/hexpm/l/ex_awsconf.svg)](https://github.com/Eigo-Mt-Fuji/ex-awsconf/blob/master/LICENSE.md)
 
 Simple cli-tool for generating aws config.<br/>
