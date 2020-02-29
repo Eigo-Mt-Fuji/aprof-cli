@@ -8,7 +8,7 @@ Hello guys.
 
 ## Require 
 
-* elixir version 1.9.4(or later)
+* elixir version 1.9(or later)
 * erlang version 21 (or later)
 
 ## How to use
