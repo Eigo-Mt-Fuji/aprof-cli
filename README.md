@@ -46,7 +46,7 @@ mkdir -p ./artifacts
 * Execute
 
 ```bash
-./aprof_cli <parent_aws_account_id> ./files ./artifacts json arn:aws:iam::<parenparent_aws_account_idt_account_id>:mfa/<user_name> <role_session_name>
+./ex_awsconf <parent_aws_account_id> ./files ./artifacts json arn:aws:iam::<parenparent_aws_account_idt_account_id>:mfa/<user_name> <role_session_name>
 ```
 
   - with Docker.
