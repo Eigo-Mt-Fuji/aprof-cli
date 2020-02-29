@@ -14,7 +14,7 @@ defmodule ExAwsConf do
     - organization_account_id: String that represents the top of aws account id of your organization
     - src_dir: String that represents the directory which having your aws accounts listing csv files. this tool will make aws-config based on list in csv file
       - each csv file should have follows attributes in each line.(Note: header is not required)
-         - "<aws_account_id>","<root login e-mail address>","aws iam-role name","profile name(for aws-cli)","display name(for browser)"
+         - "aws_account_id","root login e-mail address","aws iam-role name","profile name(for aws-cli)","display name(for browser)"
     - dest_dir: String that represents the destination directory (aws-cli config switch-role login markdown will be exported into this directory.)
     - role_session_name: String that represents name of switch-role logined user on aws-cli 
     - mfa_serial: String that represents the aws your IAM user's MFA serial.
