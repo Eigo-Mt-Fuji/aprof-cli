@@ -61,7 +61,7 @@ docker run -v $(pwd)/files:/usr/local/src/files:ro -v $(pwd)/artifacts:/usr/loca
 {
   "artifacts": [
     {
-      "aws_config": "./my-accounts/config",
+      "aws_config": "./artifacts/my-accounts/config",
       "src": "./files/my-accounts.csv",
       "switch_role_link_md": "./artifacts/my-accounts/switch_role_link.md"
     },
