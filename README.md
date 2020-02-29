@@ -1,10 +1,25 @@
 # README
 
-Hello guys.
+[![hex.pm version](https://img.shields.io/hexpm/v/ex_awsconf.svg)](https://hexdocs.pm/packages/ex_awsconf)
+[![hex.pm](https://img.shields.io/hexpm/l/ex_awsconf.svg)](https://github.com/Eigo-Mt-Fuji/ex-awsconf/blob/master/LICENSE.md)
 
-[ex_awsconf](https://hexdocs.pm/ex_awsconf) is a simple Elixir cli tool for generating aws-cli config.<br/>
+Simple cli-tool for generating aws config.<br/>
 (and also generating AWS switch role login links markdown file.)
 
+
+## Installation
+
+If [available Docker](https://hub.docker.com/r/efgriver/ex-awsconf), the docker image can be installed by `docker pull efgriver/ex-awsconf` command on terminal.
+ 
+If [available in Hex](https://hexdocs.pm/ex_awsconf), the package can be installed by adding `ex_awsconf` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:ex_awsconf, "~> 0.1.2"}
+  ] 
+end
+```
 
 ## Require 
 
