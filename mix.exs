@@ -11,6 +11,8 @@ defmodule ExAwsConf.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       escript: escript(),
+      source_url: "https://github.com/Eigo-Mt-Fuji/ex-awsconf",
+      homepage_url: "https://github.com/Eigo-Mt-Fuji/ex-awsconf",
       releases: [
         ex_awsconf: [
           include_executables_for: [:unix],
