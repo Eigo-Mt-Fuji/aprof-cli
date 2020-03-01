@@ -96,8 +96,8 @@ docker run \
 
 ```bash
 $ find -type f $(pwd)/artifacts
-/Users/fujikawa/Documents/git/aprof-cli/artifacts/my-accounts/config
-/Users/fujikawa/Documents/git/aprof-cli/artifacts/my-accounts/switch_role_link.md
+/Users/fujikawa/Documents/git/ex-awsconf/artifacts/my-accounts/config
+/Users/fujikawa/Documents/git/ex-awsconf/artifacts/my-accounts/switch_role_link.md
 ```
 
 
